@@ -1,0 +1,180 @@
+.app {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1.25rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.app-header p {
+  margin: 0.35rem 0 0;
+  color: #616161;
+}
+
+.date-filter {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.feedback {
+  margin: 0.5rem 0;
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+}
+
+.feedback.success {
+  color: #0f6b35;
+  background: #def7e5;
+  border-color: #a7e0b6;
+}
+
+.feedback.error {
+  color: #b42318;
+  background: #fee4e2;
+  border-color: #f8b4af;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #d9dee6;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.create-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.8rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+label,
+.label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1f2937;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
+  background: #ffffff;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+}
+
+.primary-btn {
+  background: #0068d6;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.secondary-btn {
+  background: #e8edf3;
+  color: #1f2937;
+}
+
+.shift-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 900px) {
+  .shift-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.shift-card {
+  border: 1px solid #d9dee6;
+  border-radius: 10px;
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.shift-meta h3 {
+  margin: 0;
+}
+
+.subtle {
+  color: #6b7280;
+  margin: 0;
+}
+
+.status-good {
+  color: #0f6b35;
+  font-weight: 600;
+}
+
+.status-warn {
+  color: #8a6100;
+  font-weight: 600;
+}
+
+.assigned-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.assigned-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.notes {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+@media (max-width: 700px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "Shift Care full-stack web application",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "build": "npm run build --prefix frontend",
+    "start": "npm run start --prefix backend",
+    "test": "echo \"No root tests configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prakasbhattarai-web/test_manoj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prakasbhattarai-web/test_manoj/issues"
+  },
+  "homepage": "https://github.com/prakasbhattarai-web/test_manoj#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
