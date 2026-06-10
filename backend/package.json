@@ -1,0 +1,17 @@
+{
+  "name": "booking-appointments-backend",
+  "version": "1.0.0",
+  "description": "Booking appointments system - backend API",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "date-fns": "^3.6.0",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "uuid": "^9.0.1"
+  }
+}

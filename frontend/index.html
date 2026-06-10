@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookEase – Appointment Booking</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">&#128197;</span>
+        <span class="logo-text">BookEase</span>
+      </div>
+      <nav class="header-nav">
+        <button class="nav-btn active" data-view="book">Book Appointment</button>
+        <button class="nav-btn" data-view="appointments">My Appointments</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="container">
+
+    <!-- ========== BOOKING WIZARD VIEW ========== -->
+    <section id="view-book" class="view active">
+      <div class="section-header">
+        <div>
+          <h1>Book an Appointment</h1>
+          <p class="subtitle">Choose a service and pick a convenient time.</p>
+        </div>
+      </div>
+
+      <!-- Step progress bar -->
+      <div class="stepper" aria-label="Booking steps">
+        <div class="step active" data-step="1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Service</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step" data-step="2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Date</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step" data-step="3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Time</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step" data-step="4">
+          <div class="step-circle">4</div>
+          <div class="step-label">Details</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step" data-step="5">
+          <div class="step-circle">5</div>
+          <div class="step-label">Confirm</div>
+        </div>
+      </div>
+
+      <!-- STEP 1 — Select service -->
+      <div class="wizard-panel active card" id="step-1">
+        <h2 class="panel-title">Select a Service</h2>
+        <p class="panel-subtitle">Choose the type of appointment you need.</p>
+        <div id="services-grid" class="services-grid">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading services&hellip;</p>
+          </div>
+        </div>
+        <div class="wizard-actions">
+          <span></span>
+          <button class="btn btn-primary" id="step1-next" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 — Pick date -->
+      <div class="wizard-panel card" id="step-2">
+        <h2 class="panel-title">Pick a Date</h2>
+        <p class="panel-subtitle">Select your preferred appointment date.</p>
+        <div class="date-picker-wrapper">
+          <label for="booking-date" class="field-label">Appointment date</label>
+          <input type="date" id="booking-date" class="date-input" />
+          <p class="field-hint">Available Monday &ndash; Sunday, 9 am &ndash; 5 pm (1-hour slots).</p>
+        </div>
+        <div class="wizard-actions">
+          <button class="btn btn-outline" id="step2-back">&larr; Back</button>
+          <button class="btn btn-primary" id="step2-next" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — Choose time slot -->
+      <div class="wizard-panel card" id="step-3">
+        <h2 class="panel-title">Choose a Time Slot</h2>
+        <p class="panel-subtitle" id="slots-subtitle">Select an available time.</p>
+        <div id="slots-container" class="slots-container">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Checking availability&hellip;</p>
+          </div>
+        </div>
+        <div class="wizard-actions">
+          <button class="btn btn-outline" id="step3-back">&larr; Back</button>
+          <button class="btn btn-primary" id="step3-next" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 — Fill details -->
+      <div class="wizard-panel card" id="step-4">
+        <h2 class="panel-title">Your Details</h2>
+        <p class="panel-subtitle">Tell us who this appointment is for.</p>
+        <form id="details-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="input-name" class="field-label">Full Name <span class="required">*</span></label>
+              <input type="text" id="input-name" class="form-input" placeholder="Jane Smith" autocomplete="name" />
+              <span class="field-error" id="err-name"></span>
+            </div>
+            <div class="form-group">
+              <label for="input-email" class="field-label">Email Address <span class="required">*</span></label>
+              <input type="email" id="input-email" class="form-input" placeholder="jane@example.com" autocomplete="email" />
+              <span class="field-error" id="err-email"></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="input-phone" class="field-label">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="input-phone" class="form-input" placeholder="555-0100" autocomplete="tel" />
+              <span class="field-error" id="err-phone"></span>
+            </div>
+            <div class="form-group">
+              <!-- spacer -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input-notes" class="field-label">
+              Additional Notes <span class="optional">(optional)</span>
+            </label>
+            <textarea id="input-notes" class="form-input form-textarea" rows="3"
+              placeholder="Any special requests or information&hellip;" maxlength="500"></textarea>
+            <span class="field-hint char-counter" id="notes-counter">0 / 500</span>
+          </div>
+        </form>
+        <div class="wizard-actions">
+          <button class="btn btn-outline" id="step4-back">&larr; Back</button>
+          <button class="btn btn-primary" id="step4-next">Review &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 5 — Confirm -->
+      <div class="wizard-panel card" id="step-5">
+        <h2 class="panel-title">Confirm Your Booking</h2>
+        <p class="panel-subtitle">Please review your appointment details before confirming.</p>
+
+        <div class="confirmation-card">
+          <div class="conf-row">
+            <span class="conf-label">Service</span>
+            <span class="conf-value" id="conf-service">—</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Date</span>
+            <span class="conf-value" id="conf-date">—</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Time</span>
+            <span class="conf-value" id="conf-time">—</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Price</span>
+            <span class="conf-value conf-price" id="conf-price">—</span>
+          </div>
+          <div class="conf-divider"></div>
+          <div class="conf-row">
+            <span class="conf-label">Name</span>
+            <span class="conf-value" id="conf-name">—</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Email</span>
+            <span class="conf-value" id="conf-email">—</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Phone</span>
+            <span class="conf-value" id="conf-phone">—</span>
+          </div>
+          <div class="conf-row" id="conf-notes-row">
+            <span class="conf-label">Notes</span>
+            <span class="conf-value" id="conf-notes">—</span>
+          </div>
+        </div>
+
+        <div id="booking-alert" class="alert hidden"></div>
+
+        <div class="wizard-actions">
+          <button class="btn btn-outline" id="step5-back">&larr; Edit</button>
+          <button class="btn btn-success" id="btn-confirm-booking">
+            <span id="confirm-btn-text">Confirm Booking</span>
+            <span id="confirm-btn-spinner" class="btn-spinner hidden"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP SUCCESS -->
+      <div class="wizard-panel card" id="step-success">
+        <div class="success-panel">
+          <div class="success-icon">&#10003;</div>
+          <h2>Booking Confirmed!</h2>
+          <p class="success-msg">Your appointment has been successfully booked. We look forward to seeing you!</p>
+          <div id="success-summary" class="success-summary"></div>
+          <div class="success-actions">
+            <button class="btn btn-outline" id="btn-book-another">Book Another Appointment</button>
+            <button class="btn btn-primary" id="btn-view-appointments-after">View All Appointments</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== APPOINTMENTS LIST VIEW ========== -->
+    <section id="view-appointments" class="view hidden">
+      <div class="section-header">
+        <div>
+          <h1>Appointments</h1>
+          <p class="subtitle">View and manage all your bookings.</p>
+        </div>
+        <button class="btn btn-primary" id="btn-new-booking">+ New Booking</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-bar card">
+        <div class="filter-group">
+          <label for="filter-status" class="filter-label">Status</label>
+          <select id="filter-status" class="filter-select">
+            <option value="">All statuses</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-date" class="filter-label">Date</label>
+          <input type="date" id="filter-date" class="filter-input" />
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-outline btn-sm" id="btn-clear-filters">Clear filters</button>
+          <button class="btn btn-outline btn-sm" id="btn-refresh-list">&#8635; Refresh</button>
+        </div>
+      </div>
+
+      <div id="appointments-container" class="appointments-container">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading appointments&hellip;</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== CANCEL MODAL ===== -->
+  <div id="cancel-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Cancel Appointment</h3>
+      </div>
+      <div class="modal-body">
+        <p id="modal-body-text">Are you sure you want to cancel this appointment? This action cannot be undone.</p>
+        <div id="modal-appt-details" class="modal-appt-details"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="modal-keep-btn">Keep Appointment</button>
+        <button class="btn btn-danger" id="modal-cancel-confirm-btn">
+          <span id="modal-btn-text">Yes, Cancel It</span>
+          <span id="modal-btn-spinner" class="btn-spinner hidden"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 BookEase &mdash; All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
